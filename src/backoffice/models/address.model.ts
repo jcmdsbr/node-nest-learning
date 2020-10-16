@@ -1,5 +1,3 @@
-import { IsNotEmpty } from 'class-validator';
-
 export class Address {
   constructor(
     zipCode: string,
@@ -21,26 +19,12 @@ export class Address {
     this.country = country;
   }
 
-  @IsNotEmpty()
   zipCode: string;
-
-  @IsNotEmpty()
   street: string;
-
-  @IsNotEmpty()
   number: string;
-
-  @IsNotEmpty()
   neighborhood: string;
-
-  @IsNotEmpty()
   city: string;
-
-  @IsNotEmpty()
   state: string;
-
-  @IsNotEmpty()
   country: string;
-
   complement: string;
 }

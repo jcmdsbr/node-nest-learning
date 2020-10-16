@@ -7,7 +7,10 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { Customer } from 'src/backoffice/models/customer.model';
+import { CreateCustomerDto } from 'src/backoffice/dtos/create-customer.dto';
+import { DeleteCustomerDto } from 'src/backoffice/dtos/delete-customer.dto';
+import { GetCustomerDto } from 'src/backoffice/dtos/get-customer.dto';
+import { UpdateCustomerDto } from 'src/backoffice/dtos/update-customer.dto';
 import { BaseController } from 'src/core/controllers/base.controller';
 import { Response } from 'src/core/models/response.model';
 
@@ -20,25 +23,25 @@ export class CustomerController extends BaseController {
 
   @Get(':document')
   async getById(@Param('document') document: string): Promise<Response> {
-    return await this.safeExecuteAsync({ document });
+    return await this.safeExecuteAsync(new GetCustomerDto(document));
   }
 
   @Post()
-  async post(@Body() body: Customer): Promise<Response> {
-    return await this.safeExecuteAsync(body);
+  async post(@Body() createCustomerDto: CreateCustomerDto): Promise<Response> {
+    return await this.safeExecuteAsync(createCustomerDto);
   }
 
   @Put(':document')
   async put(
     @Param('document') document: string,
-    @Body() body: Customer,
+    @Body() updateCustomerDto: UpdateCustomerDto,
   ): Promise<Response> {
-    body.document = document;
-    return await this.safeExecuteAsync(body);
+    updateCustomerDto.document = document;
+    return await this.safeExecuteAsync(updateCustomerDto);
   }
 
   @Delete(':document')
   async delete(@Param('document') document: string): Promise<Response> {
-    return await this.safeExecuteAsync({ document });
+    return await this.safeExecuteAsync(new DeleteCustomerDto(document));
   }
 }

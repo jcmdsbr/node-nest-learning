@@ -1,12 +1,5 @@
 import { Prop, Schema } from '@nestjs/mongoose';
-import { Type } from 'class-transformer/decorators';
 import * as mongoose from 'mongoose';
-import {
-  IsNotEmpty,
-  IsNotEmptyObject,
-  Length,
-  ValidateNested,
-} from 'class-validator';
 
 import { Address } from './address.model';
 import { CreditCard } from './credit-card.model';
@@ -33,34 +26,20 @@ export class Customer extends Document {
     this.user = user;
   }
   @Prop({ required: true, trim: true, index: { unique: true } })
-  @IsNotEmpty()
-  @Length(11)
   document: string;
 
   @Prop()
-  @IsNotEmptyObject()
-  @ValidateNested({ each: true })
-  @Type(() => Pet)
   pets: Pet[];
 
   @Prop()
-  @ValidateNested()
-  @Type(() => Address)
   billingAddress: Address;
 
   @Prop()
-  @ValidateNested()
-  @Type(() => Address)
   shippingAddress: Address;
 
   @Prop()
-  @ValidateNested()
-  @Type(() => Address)
   creditCard: CreditCard;
 
   @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  @IsNotEmptyObject()
-  @ValidateNested()
-  @Type(() => User)
   user: User;
 }

@@ -1,4 +1,4 @@
 import { SchemaFactory } from '@nestjs/mongoose';
-import { Customer } from '../../models/customer.model';
+import { Customer } from '../models/customer.model';
 
 export const CustomerSchema = SchemaFactory.createForClass(Customer);
