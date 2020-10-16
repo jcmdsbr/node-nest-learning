@@ -1,3 +1,3 @@
 export class Response {
-  constructor(public data?: any, public notifications?: string[]) {}
+  constructor(public data?: any, public message: string[] = []) {}
 }

@@ -8,10 +8,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { Customer } from 'src/backoffice/models/customer.model';
+import { BaseController } from 'src/core/controllers/base.controller';
 import { Response } from 'src/core/models/response.model';
 
 @Controller('api/v1/customers')
-export class CustomerController {
+export class CustomerController extends BaseController {
   @Get()
   async get(): Promise<Response> {
     return new Response();
@@ -19,12 +20,12 @@ export class CustomerController {
 
   @Get(':document')
   async getById(@Param('document') document: string): Promise<Response> {
-    return new Response();
+    return await this.safeExecuteAsync({ document });
   }
 
   @Post()
   async post(@Body() body: Customer): Promise<Response> {
-    return new Response(body);
+    return await this.safeExecuteAsync(body);
   }
 
   @Put(':document')
@@ -32,11 +33,12 @@ export class CustomerController {
     @Param('document') document: string,
     @Body() body: Customer,
   ): Promise<Response> {
-    return new Response(body);
+    body.document = document;
+    return await this.safeExecuteAsync(body);
   }
 
   @Delete(':document')
   async delete(@Param('document') document: string): Promise<Response> {
-    return new Response();
+    return await this.safeExecuteAsync({ document });
   }
 }
