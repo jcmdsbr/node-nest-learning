@@ -1,4 +1,4 @@
-# Nest Learning basic concepts
+# Nest Learning basic concepts :sunglasses:
 - Learning basic concepts using nestJs framework
 
 ## Give a Star! :star:
